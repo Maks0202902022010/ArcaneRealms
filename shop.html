@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop | Arcane Realms</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@motionone/dom"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #111;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            width: 100%;
+            color: #00fff0;
+            clip: rect(0, 900px, 0, 0);
+        }
+        
+        .glitch::after {
+            color: #ff00ff;
+        }
+        
+        .glitch.active::before {
+            animation: glitch-anim 0.5s infinite linear alternate-reverse;
+        }
+        
+        .glitch.active::after {
+            animation: glitch-anim 0.5s infinite linear alternate;
+        }
+        
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(5px, 9999px, 10px, 0);
+                transform: translate(1px, -1px);
+            }
+            50% {
+                clip: rect(70px, 9999px, 80px, 0);
+                transform: translate(-1px, 1px);
+            }
+            100% {
+                clip: rect(35px, 9999px, 40px, 0);
+                transform: translate(1px, 0);
+            }
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .shop-section {
+            margin-top: 40px;
+            text-align: left;
+            max-width: 1000px;
+        }
+        
+        .shop-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            margin: 15px 0;
+            border-radius: 10px;
+        }
+        
+        .shop-item h3 {
+            font-size: 1.5rem;
+            color: #00fff0;
+        }
+        
+        .shop-item p {
+            font-size: 1rem;
+            color: #ddd;
+        }
+        
+        .shop-item button {
+            padding: 8px 16px;
+            background-color: #00fff0;
+            color: black;
+            font-weight: bold;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .shop-item button:hover {
+            background-color: #00c6b3;
+        }
+        
+        .back-btn {
+            margin-top: 30px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #00fff0;
+            color: black;
+            font-weight: bold;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .back-btn:hover {
+            background-color: #00c6b3;
+        }
+        
+        .navbar-btn {
+            margin-top: 20px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #00fff0;
+            color: black;
+            font-weight: bold;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .navbar-btn:hover {
+            background-color: #00c6b3;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="particles"></canvas>
+    <main class="relative min-h-screen flex flex-col items-center text-center z-10 px-6 pt-32 pb-20">
+        <h1 id="main-title" data-text="Shop" class="glitch relative text-5xl sm:text-6xl md:text-7xl font-bold text-cyan-400 drop-shadow-lg z-10 opacity-0">
+            Shop
+        </h1>
+
+        <div class="shop-section">
+            <div class="store-container">
+                <!-- Shop Section -->
+                <div class="shop-section">
+                    <h2>Items for Purchase</h2>
+
+                    <div class="shop-item">
+                        <div>
+                            <h3>Arcane Sword</h3>
+                            <p>A powerful sword imbued with ancient magic. Increases your attack power.</p>
+                        </div>
+                        <button>Buy for $5.00</button>
+                    </div>
+
+                    <div class="shop-item">
+                        <div>
+                            <h3>Mana Potion</h3>
+                            <p>Restores 50% of your mana. Use it in the heat of battle!</p>
+                        </div>
+                        <button>Buy for $1.50</button>
+                    </div>
+
+                    <div class="shop-item">
+                        <div>
+                            <h3>Elixir of Life</h3>
+                            <p>Restores 100% of your health. A must-have in any adventurer's kit.</p>
+                        </div>
+                        <button>Buy for $3.50</button>
+                    </div>
+
+                    <div class="shop-item">
+                        <div>
+                            <h3>Shadow Cloak</h3>
+                            <p>Grants invisibility for 5 seconds. Perfect for stealth missions.</p>
+                        </div>
+                        <button>Buy for $4.00</button>
+                    </div>
+
+                    <div class="shop-item">
+                        <div>
+                            <h3>Teleportation Scroll</h3>
+                            <p>Instantly teleport to a previously visited location.</p>
+                        </div>
+                        <button>Buy for $2.50</button>
+                    </div>
+                </div>
+
+                <!-- Privileges Section -->
+                <div class="privileges-section">
+                    <h2>Privileges for Purchase</h2>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>VIP Status</h3>
+                            <p>Get exclusive access to VIP-only areas, special items, and enhanced gameplay features. VIPs receive priority support and additional bonuses!</p>
+                        </div>
+                        <button>Buy for $14.99</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Priority Server Access</h3>
+                            <p>Skip the line during peak hours and get priority access to the server. Ensure you can play anytime!</p>
+                        </div>
+                        <button>Buy for $9.99</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Custom Username Color</h3>
+                            <p>Stand out in the chat with your custom username color! Choose from a variety of colors to express your personality.</p>
+                        </div>
+                        <button>Buy for $2.49</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Access to Private Discord Channel</h3>
+                            <p>Gain access to a private Discord channel where you can interact with the admins and fellow privileged players.</p>
+                        </div>
+                        <button>Buy for $4.99</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Custom Chat Prefix</h3>
+                            <p>Add a special prefix to your username in chat, so everyone knows you're a privileged player.</p>
+                        </div>
+                        <button>Buy for $3.99</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Extra Inventory Slots</h3>
+                            <p>Increase your inventory capacity by 10 additional slots. Perfect for collecting more loot!</p>
+                        </div>
+                        <button>Buy for $5.49</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Special Emotes</h3>
+                            <p>Unlock unique emotes that you can use in chat and reactions. Show off your style with a variety of special emotes!</p>
+                        </div>
+                        <button>Buy for $1.99</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Unlimited Fast Travel</h3>
+                            <p>Remove the cooldown on fast travel and teleport across the map instantly. Explore the world faster!</p>
+                        </div>
+                        <button>Buy for $6.99</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Exclusive Vanity Pets</h3>
+                            <p>Gain access to a variety of exclusive pets that can follow you around. They're a fun way to show off!</p>
+                        </div>
+                        <button>Buy for $7.99</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Increased Crafting Speed</h3>
+                            <p>Speed up your crafting time by 50%! Craft more efficiently and spend less time in your inventory.</p>
+                        </div>
+                        <button>Buy for $4.99</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Special Building Permissions</h3>
+                            <p>Unlock the ability to build in restricted areas or create larger structures with more creative freedom.</p>
+                        </div>
+                        <button>Buy for $10.99</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Personalized In-Game Banner</h3>
+                            <p>Design and display your very own custom banner in-game for everyone to see! Add your unique touch to your world.</p>
+                        </div>
+                        <button>Buy for $3.99</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Access to Secret Areas</h3>
+                            <p>Unlock hidden or secret areas within the game world that regular players can't access. Explore places no one else can!</p>
+                        </div>
+                        <button>Buy for $8.49</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Faster Respawn Times</h3>
+                            <p>After dying, respawn instantly without waiting. Keep the action going and never miss a beat.</p>
+                        </div>
+                        <button>Buy for $4.29</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Exclusive Weekly Loot Boxes</h3>
+                            <p>Receive an exclusive loot box every week, filled with powerful items and rare gear to enhance your adventures.</p>
+                        </div>
+                        <button>Buy for $5.99/month</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Customizable Game Music</h3>
+                            <p>Change the background music to your preferred tracks, creating a unique atmosphere for your gameplay.</p>
+                        </div>
+                        <button>Buy for $2.79</button>
+                    </div>
+
+                    <div class="privilege-item">
+                        <div>
+                            <h3>Special Effects for Spells</h3>
+                            <p>Customize the visual effects of your spells and abilities with unique, eye-catching effects that stand out in battle.</p>
+                        </div>
+                        <button>Buy for $6.49</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-btn">Back to Home</a>
+
+        <!-- Added buttons for other pages -->
+        <a href="about.html" class="navbar-btn">About Us</a>
+        <a href="contact.html" class="navbar-btn">Contact</a>
+        <a href="rules.html" class="navbar-btn">Server Rules</a>
+        <a href="shop.html" class="navbar-btn">Shop</a>
+        <a href="serverStatus.html" class="navbar-btn">Server Status</a>
+    </main>
+
+    <script>
+        // Fade-in + glitch effect
+        window.addEventListener("DOMContentLoaded", () => {
+            const title = document.getElementById("main-title");
+            setTimeout(() => {
+                title.classList.add("active");
+                title.style.opacity = 1;
+            }, 400);
+        });
+
+        // Particle Sparkle Background
+        const canvas = document.getElementById("particles");
+        const ctx = canvas.getContext("2d");
+        let width, height, particles;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = Array.from({
+                length: 70
+            }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                r: Math.random() * 1.5 + 1,
+                dx: (Math.random() - 0.5) * 0.4,
+                dy: (Math.random() - 0.5) * 0.4,
+            }));
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = "#00fff0";
+            particles.forEach(p => {
+                p.x += p.dx;
+                p.y += p.dy;
+                if (p.x < 0 || p.x > width) p.dx *= -1;
+                if (p.y < 0 || p.y > height) p.dy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener("resize", resize);
+        resize();
+        draw();
+    </script>
+</body>
+
+</html>

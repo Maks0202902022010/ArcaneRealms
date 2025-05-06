@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>About Us - Arcane Realms</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@motionone/dom"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
+    <style>
+        /* Same styles from the previous page */
+        
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            width: 100%;
+            color: #00fff0;
+            clip: rect(0, 900px, 0, 0);
+        }
+        
+        .glitch::after {
+            color: #ff00ff;
+        }
+        
+        .glitch.active::before {
+            animation: glitch-anim 0.5s infinite linear alternate-reverse;
+        }
+        
+        .glitch.active::after {
+            animation: glitch-anim 0.5s infinite linear alternate;
+        }
+        
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(5px, 9999px, 10px, 0);
+                transform: translate(1px, -1px);
+            }
+            50% {
+                clip: rect(70px, 9999px, 80px, 0);
+                transform: translate(-1px, 1px);
+            }
+            100% {
+                clip: rect(35px, 9999px, 40px, 0);
+                transform: translate(1px, 0);
+            }
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="particles"></canvas>
+
+    <!-- Navigation Menu -->
+    <nav class="absolute top-0 left-0 right-0 p-4 flex justify-center gap-6 z-10 opacity-0">
+        <a href="index.html" class="text-cyan-500 hover:text-cyan-600">Home</a>
+        <a href="about.html" class="text-cyan-500 hover:text-cyan-600">About Us</a>
+        <a href="contact.html" class="text-cyan-500 hover:text-cyan-600">Contact</a>
+        <a href="rules.html" class="text-cyan-500 hover:text-cyan-600">Rules</a>
+        <a href="shop.html" class="text-cyan-500 hover:text-cyan-600">Shop</a>
+        <a href="serverStatus.html" class="text-cyan-500 hover:text-cyan-600">Server Status</a>
+    </nav>
+
+    <main class="relative min-h-screen flex flex-col justify-center items-center text-center z-10 px-6 pt-32 pb-20">
+        <h1 class="glitch relative text-5xl sm:text-6xl md:text-7xl font-bold text-cyan-400 drop-shadow-lg z-10 opacity-0" data-text="About Us">
+            About Us
+        </h1>
+
+        <p class="mt-6 text-gray-300 max-w-xl text-lg sm:text-xl z-10">
+            Welcome to Arcane Realms — a community-driven Minecraft server where magic and survival collide! Master powerful spells, explore mysterious lands, and uncover ancient secrets in a world shaped by forgotten gods and shifting events. Battle epic beasts,
+            build fortresses, and compete in intense PvP or craft, trade, and shape thriving communities. With dynamic biomes, evolving gameplay, and rich lore, no two journeys are the same. Join us and forge your path in a realm where magic is life,
+            and adventure never ends!
+        </p>
+
+
+
+        <div class="mt-12 flex justify-center gap-6 z-10">
+            <a href="index.html" class="bg-cyan-500 hover:bg-cyan-600 text-black font-semibold py-3 px-6 rounded-xl shadow-xl transition">
+              Back to Home
+            </a>
+        </div>
+    </main>
+
+    <script>
+        // Fade-in + glitch effect for About Us page
+        window.addEventListener("DOMContentLoaded", () => {
+            const title = document.querySelector("h1");
+            const subtitle = document.querySelector("p");
+            const bodyText = document.querySelectorAll(".mt-10 p");
+            const button = document.querySelector("a");
+
+            setTimeout(() => {
+                title.classList.add("active");
+                title.style.opacity = 1;
+            }, 400);
+
+            setTimeout(() => {
+                subtitle.style.opacity = 1;
+            }, 1200);
+
+            setTimeout(() => {
+                bodyText.forEach(text => text.style.opacity = 1);
+            }, 1600);
+
+            setTimeout(() => {
+                button.style.opacity = 1;
+            }, 2200);
+        });
+
+        // Sparkle Particle Canvas
+        const canvas = document.getElementById("particles");
+        const ctx = canvas.getContext("2d");
+        let width, height, particles;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = Array.from({
+                length: 70
+            }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                r: Math.random() * 1.5 + 1,
+                dx: (Math.random() - 0.5) * 0.4,
+                dy: (Math.random() - 0.5) * 0.4,
+            }));
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = "#00fff0";
+            particles.forEach(p => {
+                p.x += p.dx;
+                p.y += p.dy;
+                if (p.x < 0 || p.x > width) p.dx *= -1;
+                if (p.y < 0 || p.y > height) p.dy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener("resize", resize);
+        resize();
+        draw();
+    </script>
+</body>
+
+<!-- Navigation links -->
+<nav class="bg-black text-white py-4 text-center">
+    <a href="index.html" class="mx-4">Home</a>
+    <a href="about.html" class="mx-4">About Us</a>
+    <a href="contact.html" class="mx-4">Contact</a>
+    <a href="rules.html" class="mx-4">Rules</a>
+    <a href="shop.html" class="mx-4">Shop</a>
+    <a href="serverStatus.html" class="mx-4">Server Status</a>
+</nav>
+
+</html>

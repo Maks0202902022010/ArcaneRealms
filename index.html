@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to Arcane Realms</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@motionone/dom"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #111;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            width: 100%;
+            color: #00fff0;
+            clip: rect(0, 900px, 0, 0);
+        }
+        
+        .glitch::after {
+            color: #ff00ff;
+        }
+        
+        .glitch.active::before {
+            animation: glitch-anim 0.5s infinite linear alternate-reverse;
+        }
+        
+        .glitch.active::after {
+            animation: glitch-anim 0.5s infinite linear alternate;
+        }
+        
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(5px, 9999px, 10px, 0);
+                transform: translate(1px, -1px);
+            }
+            50% {
+                clip: rect(70px, 9999px, 80px, 0);
+                transform: translate(-1px, 1px);
+            }
+            100% {
+                clip: rect(35px, 9999px, 40px, 0);
+                transform: translate(1px, 0);
+            }
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Server Features Section */
+        
+        #server-features {
+            background: linear-gradient(45deg, #1f1f1f, #333);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        #server-features h2 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            color: #00fff0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-item {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0, 255, 240, 0.2);
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 255, 240, 0.5);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #00fff0;
+        }
+        
+        .feature-item h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #00fff0;
+        }
+        
+        .feature-item p {
+            font-size: 1rem;
+            color: #bbb;
+            line-height: 1.6;
+        }
+        /* Icon Styling (Font Awesome) */
+        
+        .fas {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-icon:hover {
+            transform: scale(1.1);
+            color: #ff7f50;
+        }
+        
+        .status-message {
+            margin-top: 10px;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="particles"></canvas>
+    <main class="relative min-h-screen flex flex-col justify-center items-center text-center z-10 px-6 pt-32 pb-20">
+        <h1 id="main-title" data-text="Welcome to Arcane Realms" class="glitch relative text-5xl sm:text-6xl md:text-7xl font-bold text-cyan-400 drop-shadow-lg z-10 opacity-0">
+            Welcome to Arcane Realms
+        </h1>
+
+        <p id="random-text" class="mt-6 text-gray-300 max-w-xl text-lg sm:text-xl z-10">
+            <script>
+                // Array of 50 random texts
+                const texts = [
+                    "Embark on a journey through magic, adventure, and mystery. Join us in shaping a world where fantasy becomes reality.",
+                    "Uncover the secrets of an ancient realm filled with mystical creatures and powerful magic. Your adventure begins here.",
+                    "Step into a world where imagination comes alive, and every choice shapes your fate.",
+                    "Explore vast landscapes, face powerful enemies, and experience epic quests like never before.",
+                    "Dive deep into a world of endless possibilities and discover hidden treasures along the way.",
+                    "Join a vibrant community of adventurers and create your own story in the world of Arcane Realms.",
+                    "Unleash your inner hero in a land full of danger, mystery, and magic.",
+                    "Every corner of the world holds a new adventure waiting to be discovered.",
+                    "Become part of an epic saga where every action has consequences, and every choice leads to new adventures.",
+                    "Journey through enchanted forests, vast deserts, and towering mountains as you unlock the mysteries of Arcane Realms.",
+                    "Craft your destiny in a world where magic is real, and heroes are born.",
+                    "Venture into the unknown, where danger lurks around every corner and treasures await the bold.",
+                    "In Arcane Realms, your destiny is in your hands. Choose wisely, adventurer.",
+                    "Join forces with other players or face the challenges of the world alone in this exciting multiplayer adventure.",
+                    "A land of magic and mystery awaits. Will you rise to the challenge or fall before the darkness?",
+                    "Explore the untold mysteries of the Arcane Realms and uncover secrets hidden for centuries.",
+                    "Discover ancient magic, powerful artifacts, and legendary creatures in your quest for greatness.",
+                    "Choose your path and begin your adventure in a world where anything is possible.",
+                    "Arcane Realms is calling. Will you answer the call to adventure?",
+                    "Your journey begins now. Will you conquer the challenges ahead or become lost in the realms of magic?",
+                    "Unveil the truth behind the world’s most ancient mysteries in this magical adventure.",
+                    "Get ready for a journey that will challenge your mind, your skills, and your courage.",
+                    "A world of magic and danger awaits those brave enough to venture forth.",
+                    "The adventure of a lifetime begins in the heart of Arcane Realms. Are you ready to embrace it?",
+                    "Forge your legend in a world where every decision matters, and every hero's journey is unique.",
+                    "Step into a world that challenges your imagination and tests your skills as you conquer new challenges.",
+                    "In Arcane Realms, heroes are made by their actions, not their words.",
+                    "Face your fears, discover your strength, and change the fate of the realms.",
+                    "A world of magic, mystery, and adventure is waiting for you. Will you answer its call?",
+                    "Every day in Arcane Realms brings new opportunities, new dangers, and new adventures.",
+                    "Your adventure begins in the heart of a land full of ancient secrets, powerful magic, and epic quests.",
+                    "Join an ever-growing community of adventurers, each with their own story to tell.",
+                    "Will you become a legend, or will your story fade into the shadows of the past?",
+                    "In Arcane Realms, every action you take has the power to shape the world around you.",
+                    "Choose your allies wisely, for in this world, trust can be the most powerful weapon.",
+                    "Adventure, danger, magic, and mystery – all await you in Arcane Realms.",
+                    "Step into a world where the boundaries of reality and fantasy blur, and adventure is limitless.",
+                    "Explore new realms, uncover lost civilizations, and wield powerful magic as you journey through Arcane Realms.",
+                    "Your journey is unique. Your choices shape your path, and your path shapes the world.",
+                    "In Arcane Realms, you're not just a player – you're part of the story.",
+                    "The world of Arcane Realms is vast, filled with wonder, magic, and adventure at every turn.",
+                    "No two journeys are alike in Arcane Realms. Your story is yours to write.",
+                    "A land filled with adventure, danger, and magic is calling. Are you ready to heed the call?",
+                    "Will you conquer the Arcane Realms and carve your name into its history, or will you fall to the shadows?",
+                    "Only the bravest adventurers can face the challenges of Arcane Realms. Are you among them?",
+                    "Unlock the mysteries of the Arcane Realms and discover a world unlike any other.",
+                    "Your quest awaits in a land where magic reigns and adventure knows no limits.",
+                    "Explore, discover, and conquer in the world of Arcane Realms, where every adventure is a new beginning.",
+                    "A journey through magic, mystery, and danger awaits you in the Arcane Realms.",
+                    "Will you answer the call of adventure, or will you let the realms slip into darkness?",
+                    "The fate of the Arcane Realms is in your hands. Will you rise to the challenge?",
+                    "A new dawn is rising in Arcane Realms – will you help shape it?",
+                    "Are you ready to become the hero this world needs, or will you fall to its most dangerous secrets?",
+                    "Legends are not born – they are made. Will your name be written in the stars of Arcane Realms?",
+                    "In Arcane Realms, danger, magic, and mystery are just the beginning of your story.",
+                    "Prepare yourself for a journey of epic proportions. The realms are waiting for you.",
+                    "Every corner of Arcane Realms hides something extraordinary. Will you discover it?",
+                    "Adventure is calling, and only the bold will answer. Will you be one of them?",
+                    "Embrace the chaos, master the magic, and leave your mark on Arcane Realms.",
+                    "Uncover the secrets of the ancients, defeat mythical beasts, and become the ultimate champion of the Arcane Realms.",
+                    "In a world where magic is real, and adventure is limitless, your journey begins now.",
+                    "The Arcane Realms are alive with magic, mystery, and adventure. Will you be the one to unlock their secrets?",
+                    "Your adventure in Arcane Realms is just beginning. Are you ready to embrace the unknown?",
+                    "Join us in a world where every choice matters, and every adventure is unique.",
+                    "The Arcane Realms are waiting for you. Will you answer the call of adventure?",
+                    "Step into a world of magic, mystery, and endless possibilities. Your journey awaits.",
+                    "In Arcane Realms, every hero's journey is a story waiting to be told.",
+                    "The adventure of a lifetime is just a click away. Will you take the leap?",
+                    "Join a community of adventurers and create your own story in the world of Arcane Realms.",
+                    "Unleash your imagination and embark on a journey filled with magic, adventure, and mystery.",
+                    "In Arcane Realms, the only limit is your imagination. What will you create?",
+                    "The world of Arcane Realms is vast and full of wonder. Are you ready to explore it?",
+                ];
+
+
+                // Randomly select a text from the array
+                const randomText = texts[Math.floor(Math.random() * texts.length)];
+
+                // Insert the random text into the paragraph
+                document.getElementById("random-text").textContent = randomText;
+            </script>
+        </p>
+
+
+        <div class="mt-6 flex flex-wrap justify-center gap-4 z-10">
+            <a href="about.html" class="bg-cyan-500 hover:bg-cyan-600 text-black font-semibold py-3 px-6 rounded-xl shadow-xl transition">
+          Learn More
+        </a>
+            <a href="contact.html" class="bg-transparent hover:bg-cyan-500 text-white border-2 border-cyan-500 font-semibold py-3 px-6 rounded-xl shadow-xl transition">
+          Contact Us
+        </a>
+
+            <p id="status-message" class="status-message"></p>
+            <button id="copy-ip-btn" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-xl shadow-xl transition">
+          Copy Server IP
+        </button>
+
+            <p id="status-message" class="status-message"></p>
+        </div>
+
+        <script>
+            // Server IP to be copied
+            const serverIP = 'mc.ArcaneRealms.net'; // Replace this with your actual server IP
+
+            // Button click event to copy IP to clipboard
+            document.getElementById('copy-ip-btn').addEventListener('click', function() {
+                navigator.clipboard.writeText(serverIP).then(function() {
+                    document.getElementById('status-message').textContent = 'IP copied to clipboard!';
+                }).catch(function(error) {
+                    document.getElementById('status-message').textContent = 'Failed to copy IP!';
+                });
+            });
+        </script>
+        </div>
+    </main>
+
+    <!-- Server Features Section -->
+    <section id="server-features" class="py-16 bg-black text-white">
+        <div class="container mx-auto text-center">
+            <h2 class="text-4xl font-bold text-cyan-500 mb-8">Server Features</h2>
+
+            <div id="features-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+
+                <!-- Feature 1 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl">
+                    <div class="feature-icon mb-4"><i class="fas fa-cogs text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Custom Plugins</h3>
+                    <p class="text-gray-300">Our server runs custom-built plugins to provide unique and enhanced gameplay. Experience new mechanics and more interactive features!</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl">
+                    <div class="feature-icon mb-4"><i class="fas fa-users text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Multiplayer Support</h3>
+                    <p class="text-gray-300">Join your friends on our multiplayer server and enjoy a seamless, lag-free experience with high player capacity!</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl">
+                    <div class="feature-icon mb-4"><i class="fas fa-shield-alt text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Security & Anti-Cheat</h3>
+                    <p class="text-gray-300">We prioritize the safety of all players with advanced anti-cheat systems, ensuring a fair and secure gaming environment.</p>
+                </div>
+
+                <!-- Hidden Extra Features (inside same grid) -->
+
+                <!-- Feature 4 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl hidden extra-feature">
+                    <div class="feature-icon mb-4"><i class="fas fa-trophy text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Leaderboards</h3>
+                    <p class="text-gray-300">Compete against other players and climb the ranks with our dynamic leaderboard system. Show off your skills!</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl hidden extra-feature">
+                    <div class="feature-icon mb-4"><i class="fas fa-cloud text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Cloud Storage</h3>
+                    <p class="text-gray-300">Access your custom builds, inventories, and settings across multiple devices with our cloud-based storage system.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl hidden extra-feature">
+                    <div class="feature-icon mb-4"><i class="fas fa-wrench text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">24/7 Maintenance</h3>
+                    <p class="text-gray-300">Our team is always on the lookout for improvements, with 24/7 server maintenance and frequent updates for optimal performance.</p>
+                </div>
+
+                <!-- Feature 7 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl hidden extra-feature">
+                    <div class="feature-icon mb-4"><i class="fas fa-map text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Massive World Map</h3>
+                    <p class="text-gray-300">Explore vast landscapes with custom biomes, dungeons, and hidden secrets waiting to be discovered.</p>
+                </div>
+
+                <!-- Feature 8 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl hidden extra-feature">
+                    <div class="feature-icon mb-4"><i class="fas fa-gem text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Unique Cosmetics</h3>
+                    <p class="text-gray-300">Customize your character with exclusive skins, pets, mounts, and emotes to stand out from the crowd.</p>
+                </div>
+
+                <!-- Feature 9 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl hidden extra-feature">
+                    <div class="feature-icon mb-4"><i class="fas fa-comments text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Global Chat System</h3>
+                    <p class="text-gray-300">Communicate effortlessly with players across all worlds and regions using our integrated global chat channels.</p>
+                </div>
+
+                <!-- Feature 10 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl hidden extra-feature">
+                    <div class="feature-icon mb-4"><i class="fas fa-hammer text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Player Shops</h3>
+                    <p class="text-gray-300">Buy, sell, and trade items through a fully player-driven economy with custom-built shop systems.</p>
+                </div>
+
+                <!-- Feature 11 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl hidden extra-feature">
+                    <div class="feature-icon mb-4"><i class="fas fa-fire text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Epic Boss Battles</h3>
+                    <p class="text-gray-300">Face off against challenging bosses with unique mechanics, loot drops, and thrilling rewards.</p>
+                </div>
+
+                <!-- Feature 12 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl hidden extra-feature">
+                    <div class="feature-icon mb-4"><i class="fas fa-calendar-check text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Daily Quests</h3>
+                    <p class="text-gray-300">Complete fresh daily quests and tasks for bonus rewards, currency, and experience every day.</p>
+                </div>
+
+                <!-- Feature 13 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl hidden extra-feature">
+                    <div class="feature-icon mb-4"><i class="fas fa-graduation-cap text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Skill Progression</h3>
+                    <p class="text-gray-300">Level up unique skills like mining, combat, fishing, and crafting to gain bonuses and perks.</p>
+                </div>
+
+                <!-- Feature 14 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl hidden extra-feature">
+                    <div class="feature-icon mb-4"><i class="fas fa-handshake text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Player Guilds</h3>
+                    <p class="text-gray-300">Form guilds with friends, build bases together, and compete in guild events and wars.</p>
+                </div>
+
+                <!-- Feature 15 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl hidden extra-feature">
+                    <div class="feature-icon mb-4"><i class="fas fa-crown text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Ranked Seasons</h3>
+                    <p class="text-gray-300">Participate in competitive ranked seasons to earn exclusive rewards and seasonal titles.</p>
+                </div>
+
+                <!-- Feature 16 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl hidden extra-feature">
+                    <div class="feature-icon mb-4"><i class="fas fa-bolt text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Instant Teleportation</h3>
+                    <p class="text-gray-300">Quickly teleport to friends, landmarks, and custom warps using our instant TP commands.</p>
+                </div>
+
+                <!-- Feature 17 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl hidden extra-feature">
+                    <div class="feature-icon mb-4"><i class="fas fa-bullhorn text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Custom Events</h3>
+                    <p class="text-gray-300">Join thrilling custom events hosted regularly by our team, including building contests, PvP tournaments, and treasure hunts with epic prizes.</p>
+                </div>
+
+                <!-- Feature 18 -->
+                <div class="feature-item glass p-6 rounded-xl shadow-xl hidden extra-feature">
+                    <div class="feature-icon mb-4"><i class="fas fa-mobile-alt text-4xl text-cyan-500"></i></div>
+                    <h3 class="text-2xl font-semibold text-white mb-4">Cross-Platform Support</h3>
+                    <p class="text-gray-300">Play seamlessly across PC, console, and mobile devices. Our server supports Bedrock and Java players connecting together in one world.</p>
+                </div>
+            </div>
+
+            <!-- Expand / Collapse Button -->
+            <div class="mt-8">
+                <button id="toggle-features-btn" class="bg-cyan-500 hover:bg-cyan-600 text-black font-semibold py-3 px-8 rounded-xl shadow-xl transition">
+          Show More Features
+        </button>
+            </div>
+
+
+        </div>
+    </section>
+
+    <script>
+        const toggleBtn = document.getElementById('toggle-features-btn');
+        const extraFeatures = document.querySelectorAll('.extra-feature');
+
+        toggleBtn.addEventListener('click', () => {
+            extraFeatures.forEach(item => item.classList.toggle('hidden'));
+            if (extraFeatures[0].classList.contains('hidden')) {
+                toggleBtn.textContent = 'Show More Features';
+            } else {
+                toggleBtn.textContent = 'Show Less Features';
+            }
+        });
+    </script>
+
+
+    <!-- Removed duplicate script block -->
+
+
+    <!-- Removed duplicate script block -->
+
+
+
+    <!-- Navigation links -->
+    <nav class="bg-black text-white py-4 text-center">
+        <a href="index.html" class="mx-4">Home</a>
+        <a href="about.html" class="mx-4">About Us</a>
+        <a href="contact.html" class="mx-4">Contact</a>
+        <a href="rules.html" class="mx-4">Rules</a>
+        <a href="shop.html" class="mx-4">Shop</a>
+        <a href="serverStatus.html" class="mx-4">Server Status</a>
+    </nav>
+
+    <script>
+        // Fade-in + glitch effect
+        window.addEventListener("DOMContentLoaded", () => {
+            const title = document.getElementById("main-title");
+            setTimeout(() => {
+                title.classList.add("active");
+                title.style.opacity = 1;
+            }, 400);
+        });
+
+        // Particle Sparkle Background
+        const canvas = document.getElementById("particles");
+        const ctx = canvas.getContext("2d");
+        let width, height, particles;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = Array.from({
+                length: 70
+            }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                r: Math.random() * 1.5 + 1,
+                dx: (Math.random() - 0.5) * 0.4,
+                dy: (Math.random() - 0.5) * 0.4,
+            }));
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = "#00fff0";
+            particles.forEach(p => {
+                p.x += p.dx;
+                p.y += p.dy;
+                if (p.x < 0 || p.x > width) p.dx *= -1;
+                if (p.y < 0 || p.y > height) p.dy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener("resize", resize);
+        resize();
+        draw();
+    </script>
+</body>
+
+</html>

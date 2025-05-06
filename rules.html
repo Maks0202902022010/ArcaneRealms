@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rules | Arcane Realms</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@motionone/dom"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #111;
+            color: white;
+            overflow-x: hidden;
+        }
+        
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            width: 100%;
+            color: #00fff0;
+            clip: rect(0, 900px, 0, 0);
+        }
+        
+        .glitch::after {
+            color: #ff00ff;
+        }
+        
+        .glitch.active::before {
+            animation: glitch-anim 0.5s infinite linear alternate-reverse;
+        }
+        
+        .glitch.active::after {
+            animation: glitch-anim 0.5s infinite linear alternate;
+        }
+        
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(5px, 9999px, 10px, 0);
+                transform: translate(1px, -1px);
+            }
+            50% {
+                clip: rect(70px, 9999px, 80px, 0);
+                transform: translate(-1px, 1px);
+            }
+            100% {
+                clip: rect(35px, 9999px, 40px, 0);
+                transform: translate(1px, 0);
+            }
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .rule-section {
+            margin-top: 40px;
+            text-align: left;
+            max-width: 800px;
+        }
+        
+        .rule-section h2 {
+            font-size: 2rem;
+            color: #00fff0;
+            margin-bottom: 20px;
+        }
+        
+        .rule-section p {
+            font-size: 1.2rem;
+            color: #ddd;
+            line-height: 1.6;
+        }
+        
+        .back-btn,
+        .nav-btn {
+            margin-top: 30px;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #00fff0;
+            color: black;
+            font-weight: bold;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .back-btn:hover,
+        .nav-btn:hover {
+            background-color: #00c6b3;
+        }
+        
+        .nav-buttons {
+            margin-top: 50px;
+            text-align: center;
+        }
+        
+        .nav-buttons a {
+            margin: 0 15px;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="particles"></canvas>
+    <main class="relative min-h-screen flex flex-col items-center text-center z-10 px-6 pt-32 pb-20">
+        <h1 id="main-title" data-text="Server Rules" class="glitch relative text-5xl sm:text-6xl md:text-7xl font-bold text-cyan-400 drop-shadow-lg z-10 opacity-0">
+            Server Rules
+        </h1>
+
+        <div class="rule-section">
+            <h2>7. No Offensive Usernames</h2>
+            <p>
+                Usernames that are inappropriate, offensive, or discriminatory will result in a name change or ban. Choose a respectful name for your account.
+            </p>
+
+            <h2>8. No Duplication of Builds</h2>
+            <p>
+                Duplicating someone else's builds without permission is not allowed. Respect others' creative work and ask before copying.
+            </p>
+
+            <h2>9. No Trolling</h2>
+            <p>
+                Trolling or intentionally annoying other players is forbidden. This includes stealing items, blocking players, or causing unnecessary chaos.
+            </p>
+
+            <h2>10. No Abusing Commands</h2>
+            <p>
+                Abusing server commands to harm other players or disrupt gameplay is not allowed. Use commands responsibly.
+            </p>
+
+            <h2>11. Do Not Spam</h2>
+            <p>
+                Spamming the chat with repeated messages, commands, or links is disruptive and will result in a mute or ban.
+            </p>
+
+            <h2>12. No Item Duplication</h2>
+            <p>
+                Duplicating items through any method, including exploiting bugs or glitches, is strictly forbidden.
+            </p>
+
+            <h2>13. No AFK Farming</h2>
+            <p>
+                Automated AFK farming or using scripts to farm items/resources without active participation is prohibited.
+            </p>
+
+            <h2>14. No Hacking</h2>
+            <p>
+                Any form of hacking or modifying the game to gain unfair advantages is strictly banned.
+            </p>
+
+            <h2>15. No Racial or Homophobic Slurs</h2>
+            <p>
+                Racism, homophobia, and hate speech are not tolerated in any form. Treat others with kindness and respect.
+            </p>
+
+            <h2>16. No Impersonating Staff</h2>
+            <p>
+                Impersonating admins, moderators, or other players to gain unfair advantage will result in a permanent ban.
+            </p>
+
+            <h2>17. No Unsolicited Trades</h2>
+            <p>
+                Do not offer unsolicited trades or spam others with trade requests without their consent.
+            </p>
+
+            <h2>18. No Offensive Builds</h2>
+            <p>
+                Building inappropriate or offensive structures or artwork is strictly prohibited. Keep builds family-friendly and respectful.
+            </p>
+
+            <h2>19. No Bypassing Bans</h2>
+            <p>
+                If banned, attempting to bypass the ban by creating alternate accounts will result in a permanent ban.
+            </p>
+
+            <h2>20. No Exploiting Server Features</h2>
+            <p>
+                Using unintended server features or bugs to gain an advantage is strictly prohibited and may result in a ban.
+            </p>
+
+            <h2>21. No Misleading Other Players</h2>
+            <p>
+                Do not mislead or deceive other players, such as offering fake trades or lying about game mechanics.
+            </p>
+
+            <h2>22. Be Respectful of Property</h2>
+            <p>
+                Respect the property of others. Do not steal or damage another player’s resources or structures without permission.
+            </p>
+
+            <h2>23. No Encouraging Rule-Breaking</h2>
+            <p>
+                Encouraging others to break the rules or participate in illegal activities is not allowed.
+            </p>
+
+            <h2>24. No Multi-Accounting</h2>
+            <p>
+                Having multiple accounts for the same person to exploit advantages or bypass punishments is prohibited.
+            </p>
+
+            <h2>25. No Exploiting Trade Systems</h2>
+            <p>
+                Using bugs or exploits in the trade system to gain unfair items or resources is prohibited.
+            </p>
+
+            <h2>26. No Using Unapproved Mods</h2>
+            <p>
+                Only use approved mods or modifications. Using unauthorized third-party mods is against the rules.
+            </p>
+
+            <h2>27. Do Not Steal Other Players' Builds</h2>
+            <p>
+                Do not steal or copy the creations of others without permission.
+            </p>
+
+            <h2>28. Do Not Interfere with Events</h2>
+            <p>
+                Players must not interfere with or disrupt server events or competitions. Allow others to enjoy these activities without disruption.
+            </p>
+
+            <h2>29. No Excessive Trapping</h2>
+            <p>
+                Trapping players to prevent them from leaving or progressing in the game is considered griefing and is not allowed.
+            </p>
+
+            <h2>30. Do Not Abuse the Economy</h2>
+            <p>
+                Abusing or exploiting the in-game economy to unfairly gain resources or money will lead to punishment.
+            </p>
+
+            <h2>31. No Baiting</h2>
+            <p>
+                Do not bait players into conflict or unwanted situations, whether in PvP or in social scenarios.
+            </p>
+
+            <h2>32. Respect Privacy</h2>
+            <p>
+                Do not invade other players' privacy by sharing their personal information or any confidential details without permission.
+            </p>
+
+            <h2>33. No Excessive Building in Spawn Areas</h2>
+            <p>
+                Do not build excessively near spawn areas or other key locations that interfere with gameplay or other players' experience.
+            </p>
+
+            <h2>34. Follow Server-Specific Rules</h2>
+            <p>
+                Each server may have its own specific rules and guidelines. Always read and follow these to ensure a smooth experience.
+            </p>
+
+            <h2>35. No Impersonating Other Players</h2>
+            <p>
+                Impersonating other players to cause confusion or disrupt gameplay is prohibited.
+            </p>
+
+            <h2>36. No Toxic Behavior</h2>
+            <p>
+                Toxicity in any form, including aggressive behavior, trolling, and disrupting other players' enjoyment, is not allowed.
+            </p>
+
+            <h2>37. No Exploiting the Economy</h2>
+            <p>
+                Exploiting the in-game economy to gain unfair advantages over others through unethical means is forbidden.
+            </p>
+
+            <h2>38. No Abusing Power</h2>
+            <p>
+                If you hold any administrative or staff position, do not abuse your power to harass, threaten, or manipulate others.
+            </p>
+
+            <h2>39. No Spreading False Information</h2>
+            <p>
+                Spreading false information that could harm or mislead other players is not tolerated.
+            </p>
+
+            <h2>40. No Over-Claiming Areas</h2>
+            <p>
+                Do not claim excessive areas in the world, blocking other players from building or progressing.
+            </p>
+
+            <h2>41. No Exploiting Server Resources</h2>
+            <p>
+                Using server resources or mechanics in ways they were not intended (such as lag machines) will result in punishment.
+            </p>
+
+            <h2>42. No PvP Camping</h2>
+            <p>
+                PvP camping, where you wait near a spawn point to attack unsuspecting players, is considered unfair and is prohibited.
+            </p>
+
+            <h2>43. No Harassment in Private Messages</h2>
+            <p>
+                Harassing, bullying, or threatening players in private messages is prohibited, just as it is in public chat.
+            </p>
+
+            <h2>44. Do Not Use Cheat Clients</h2>
+            <p>
+                The use of cheat clients to gain an unfair advantage, such as through speed hacks or auto-clickers, is prohibited.
+            </p>
+
+            <h2>45. Do Not Kill for No Reason</h2>
+            <p>
+                Avoid killing players without reason, as this disrupts the experience and is considered griefing.
+            </p>
+
+            <h2>46. Do Not Abuse Server Events</h2>
+            <p>
+                Using server events or challenges to gain unfair advantages over others is prohibited.
+            </p>
+
+            <h2>47. Do Not Build Over Other Players' Builds</h2>
+            <p>
+                Do not build over, block, or obscure other players' builds, especially without their consent.
+            </p>
+
+            <h2>48. Be Honest with Admins</h2>
+            <p>
+                Always be truthful when speaking with server admins. Lying or attempting to deceive admins will result in penalties.
+            </p>
+
+            <h2>49. No Inappropriate Skin Designs</h2>
+            <p>
+                Avoid using skins that are offensive or inappropriate. Your skin should reflect the family-friendly nature of the server.
+            </p>
+
+            <h2>50. No Sharing Personal Information</h2>
+            <p>
+                Do not share your personal information, such as addresses or phone numbers, within the game or chat.
+            </p>
+
+            <h2>51. No Spreading Malware or Viruses</h2>
+            <p>
+                Spreading malicious links, malware, or viruses is strictly prohibited and will result in a permanent ban.
+            </p>
+
+            <h2>52. Do Not Steal From Shops</h2>
+            <p>
+                Stealing items from player shops or inventory is considered theft and will result in appropriate punishment.
+            </p>
+
+            <h2>53. Do Not Block Server Functions</h2>
+            <p>
+                Blocking or disrupting essential server functions, such as teleportation or trading systems, is not allowed.
+            </p>
+        </div>
+
+        <a href="index.html" class="back-btn">Back to Home</a>
+
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn">Home</a>
+            <a href="about.html" class="nav-btn">About Us</a>
+            <a href="contact.html" class="nav-btn">Contact</a>
+            <a href="rules.html" class="nav-btn">Rules</a>
+            <a href="shop.html" class="nav-btn">Shop</a>
+            <a href="serverStatus.html" class="nav-btn">Server Status</a>
+        </div>
+    </main>
+
+    <script>
+        // Fade-in + glitch effect
+        window.addEventListener("DOMContentLoaded", () => {
+            const title = document.getElementById("main-title");
+            setTimeout(() => {
+                title.classList.add("active");
+                title.style.opacity = 1;
+            }, 400);
+        });
+
+        // Particle Sparkle Background
+        const canvas = document.getElementById("particles");
+        const ctx = canvas.getContext("2d");
+        let width, height, particles;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = Array.from({
+                length: 70
+            }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                r: Math.random() * 1.5 + 1,
+                dx: (Math.random() - 0.5) * 0.4,
+                dy: (Math.random() - 0.5) * 0.4,
+            }));
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = "#00fff0";
+            particles.forEach(p => {
+                p.x += p.dx;
+                p.y += p.dy;
+                if (p.x < 0 || p.x > width) p.dx *= -1;
+                if (p.y < 0 || p.y > height) p.dy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener("resize", resize);
+        resize();
+        draw();
+    </script>
+</body>
+
+</html>

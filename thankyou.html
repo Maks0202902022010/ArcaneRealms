@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Arcane Realms</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@motionone/dom"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet" />
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Orbitron', sans-serif;
+            background-color: #000;
+            color: white;
+            overflow: hidden;
+        }
+        
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            width: 100%;
+            color: #00fff0;
+            clip: rect(0, 900px, 0, 0);
+        }
+        
+        .glitch::after {
+            color: #ff00ff;
+        }
+        
+        .glitch.active::before {
+            animation: glitch-anim 0.5s infinite linear alternate-reverse;
+        }
+        
+        .glitch.active::after {
+            animation: glitch-anim 0.5s infinite linear alternate;
+        }
+        
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(5px, 9999px, 10px, 0);
+                transform: translate(1px, -1px);
+            }
+            50% {
+                clip: rect(70px, 9999px, 80px, 0);
+                transform: translate(-1px, 1px);
+            }
+            100% {
+                clip: rect(35px, 9999px, 40px, 0);
+                transform: translate(1px, 0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="particles"></canvas>
+
+    <main class="relative flex flex-col justify-center items-center min-h-screen text-center z-10 px-6">
+        <h1 id="thankyou-title" data-text="Thank You!" class="glitch relative text-5xl sm:text-6xl md:text-7xl font-bold text-cyan-400 drop-shadow-lg z-10 opacity-0 mb-6">
+            Thank You!
+        </h1>
+
+        <p class="text-lg sm:text-xl text-gray-300 max-w-xl z-10 mb-8 opacity-0" id="thankyou-text">
+            Your message has been sent successfully. We'll respond as soon as possible.
+        </p>
+
+        <a href="index.html" class="bg-cyan-500 hover:bg-cyan-600 text-black font-semibold py-3 px-6 rounded-xl shadow-xl transition z-10 opacity-0" id="back-btn">
+    Back to Home
+  </a>
+    </main>
+
+    <script>
+        // Fade-in + glitch effect
+        window.addEventListener("DOMContentLoaded", () => {
+            const title = document.getElementById("thankyou-title");
+            const text = document.getElementById("thankyou-text");
+            const btn = document.getElementById("back-btn");
+
+            setTimeout(() => {
+                title.classList.add("active");
+                title.style.opacity = 1;
+            }, 400);
+
+            setTimeout(() => {
+                text.style.opacity = 1;
+            }, 800);
+
+            setTimeout(() => {
+                btn.style.opacity = 1;
+            }, 1200);
+        });
+
+        // Particle background
+        const canvas = document.getElementById("particles");
+        const ctx = canvas.getContext("2d");
+        let width, height, particles;
+
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            particles = Array.from({
+                length: 70
+            }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                r: Math.random() * 1.5 + 1,
+                dx: (Math.random() - 0.5) * 0.4,
+                dy: (Math.random() - 0.5) * 0.4,
+            }));
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = "#00fff0";
+            particles.forEach(p => {
+                p.x += p.dx;
+                p.y += p.dy;
+                if (p.x < 0 || p.x > width) p.dx *= -1;
+                if (p.y < 0 || p.y > height) p.dy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener("resize", resize);
+        resize();
+        draw();
+    </script>
+</body>
+
+
+<!-- Navigation links -->
+<nav class="bg-black text-white py-4 text-center">
+    <a href="index.html" class="mx-4">Home</a>
+    <a href="about.html" class="mx-4">About Us</a>
+    <a href="contact.html" class="mx-4">Contact</a>
+    <a href="rules.html" class="mx-4">Rules</a>
+    <a href="shop.html" class="mx-4">Shop</a>
+    <a href="serverStatus.html" class="mx-4">Server Status</a>
+</nav>
+<!-- 
+ -->
+
+</html>
+<!--         }
+ -->
